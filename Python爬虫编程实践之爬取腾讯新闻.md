@@ -63,3 +63,25 @@ for i,jxtit in enumerate(jxtits):
     print(f'{i+1}, {text}, {url}) 
 ```
 
+```python
+# 写入 csv文件
+with open('txNews.txt', 'w') as fp:
+    fp.write("index, title, url\n")
+    
+    for i, jxtit in enumerate(jxtits):
+        try:
+            text=jxtit.find_all("img")[0]["alt"]
+        except:
+            text=jxtit.find_all("div",{"class":"lazyload-placeholder"})[0].text
+        try:
+            url=jxtit.find_all("a")[0]["href"]
+        except:
+            print(jxtit)
+        fp.write(', '.join([str(i+1), text, url]) + '\n')
+```
+
+```python
+# 关闭窗口
+driver.quit()
+```
+
